@@ -1,15 +1,14 @@
 class Solution:
     def uncommonFromSentences(self, s1: str, s2: str) -> List[str]:
+        counts = {}
         uncommonList = []
-        commonList = []
         words = s1.split() + s2.split()
-        for i, word in enumerate(words):
-            if word not in commonList:
-                if i + 1 >= len(words):
-                    uncommonList.append(word)
-                elif word in words[i + 1:]:
-                    commonList.append(word)
-                elif word not in words[i + 1:]:
-                    uncommonList.append(word)
-            # if word is already in the commonList then just ignore it :)    
+        for word in words:
+            if word in counts:
+                counts[word] += 1
+            else:
+                counts[word] = 1
+        for word in counts:
+            if counts[word] == 1:
+                uncommonList.append(word)
         return uncommonList
